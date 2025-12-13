@@ -17,6 +17,7 @@ export default {
       searchText: "",
     };
   },
+  
   watch: {
     // Đổi nội dung tìm kiếm thì bỏ chọn mục đang active
     searchText() {

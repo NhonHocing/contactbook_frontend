@@ -13,6 +13,12 @@ const routes = [
     name: "contact.add",
     component: AddContact,
   },
+  {
+    path: "/:pathMatch(.*)*",
+    // Bắt tất cả route không khớp
+    name: "notfound",
+    component: () => import("@/views/NotFound.vue"),
+  },
 ];
 
 const router = createRouter({
