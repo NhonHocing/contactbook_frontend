@@ -1,7 +1,11 @@
 <script>
 import contactService from "@/services/contact.service";
+import ContactForm from "@/components/ContactForm.vue";
 
 export default {
+  components: {
+    ContactForm,
+  },
   data() {
     return {
       contact: {
@@ -15,9 +19,9 @@ export default {
     };
   },
   methods: {
-    async saveContact() {
+    async saveContact(contact) {
       try {
-        await contactService.create(this.contact);
+        await contactService.create(contact);
         this.message = "Liên hệ được thêm thành công.";
         // Reset form
         this.contact = {
@@ -55,70 +59,11 @@ export default {
           {{ message }}
         </div>
 
-        <form @submit.prevent="saveContact">
-          <div class="mb-3">
-            <label for="name" class="form-label">Tên *</label>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              v-model="contact.name"
-              required
-            />
-          </div>
-
-          <div class="mb-3">
-            <label for="email" class="form-label">E-mail *</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              v-model="contact.email"
-              required
-            />
-          </div>
-
-          <div class="mb-3">
-            <label for="address" class="form-label">Địa chỉ</label>
-            <input
-              type="text"
-              class="form-control"
-              id="address"
-              v-model="contact.address"
-            />
-          </div>
-
-          <div class="mb-3">
-            <label for="phone" class="form-label">Điện thoại</label>
-            <input
-              type="tel"
-              class="form-control"
-              id="phone"
-              v-model="contact.phone"
-            />
-          </div>
-
-          <div class="mb-3 form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="favorite"
-              v-model="contact.favorite"
-            />
-            <label class="form-check-label" for="favorite">
-              Liên hệ yêu thích
-            </label>
-          </div>
-
-          <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-success">
-              <i class="fas fa-save"></i> Lưu
-            </button>
-            <button type="button" class="btn btn-secondary" @click="goBack">
-              <i class="fas fa-arrow-left"></i> Quay lại
-            </button>
-          </div>
-        </form>
+        <ContactForm
+          :contact="contact"
+          @submit:contact="saveContact"
+          @cancel="goBack"
+        />
       </div>
     </div>
   </div>

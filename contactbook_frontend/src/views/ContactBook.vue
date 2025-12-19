@@ -132,6 +132,15 @@ export default {
         <div class="card">
           <div class="card-body">
             <ContactCard :contact="activeContact" />
+            <router-link
+              class="mt-2 badge badge-warning d-inline-block"
+              :to="{
+                name: 'contact.edit',
+                params: { id: activeContact._id },
+              }"
+            >
+              <i class="fas fa-edit"></i> Hiệu chỉnh
+            </router-link>
           </div>
         </div>
       </div>
